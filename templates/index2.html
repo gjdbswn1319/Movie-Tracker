@@ -1,0 +1,19 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form class = 'grid' action = '/result' method = 'POST'>
+			
+			<label for = "Name">Enter Movie Title:</label>
+			<input type= 'text' name = 'name' id = 'name'>
+			<center><input type = 'Submit' class = 'file_submit'></center>
+
+			<center>
+				{% if name %}
+				<h3 style = 'color: blue;'>{{name}}</h3>
+				{% endif %}
+			</center>	
+
+		</form>
+	</body>
+</html>
