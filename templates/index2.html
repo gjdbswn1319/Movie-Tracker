@@ -16,12 +16,12 @@
 				
 			</center>	
 			<center>
-				{% if director %}
-				<h3 style = 'color: black;'>Director: {{director}}</h3>
-				{% endif %}
-				{% if director %}
-				<img src='{{poster}}'> 
-				{% endif %}
+				{% for d in director %}
+				<h3 style = 'color: black;'>Director: {{d}}</h3>
+				{% endfor %}
+				{% for p in poster %}
+				<img src='{{p}}'> 
+				{% endfor %}
 			</center>	
 
 		</form>
