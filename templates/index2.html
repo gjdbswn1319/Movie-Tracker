@@ -1,16 +1,26 @@
 <html>
 	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 	</head>
 	<body>
 		<form class = 'grid' action = '/result' method = 'POST'>
 			
-			<label for = "Name">Enter Movie Title:</label>
-			<input type= 'text' name = 'name' id = 'name'>
-			<center><input type = 'Submit' class = 'file_submit'></center>
-
 			<center>
-				{% if name %}
-				<h3 style = 'color: blue;'>{{name}}</h3>
+				<label for = "Name">Enter Movie Title:</label>
+				<input type= 'text' name = 'movie_title' id = 'name'>
+			</center>
+			<center>
+				<input type = 'Submit' class = 'file_submit'>
+			</center>
+			<center>
+				
+			</center>	
+			<center>
+				{% if director %}
+				<h3 style = 'color: black;'>Director: {{director}}</h3>
+				{% endif %}
+				{% if director %}
+				<img src='{{poster}}'> 
 				{% endif %}
 			</center>	
 
