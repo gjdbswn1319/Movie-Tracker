@@ -4,23 +4,37 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 	</head>
 	<body>
+		
+		{% if poster %}
+			<input type='image' src='{{poster}}' alt='Poster Not Found'>
+		{% endif %}
 		{% if title %}
 			<h3>Title: {{title}}</h3>
 		{% endif %}
-		<!--{% if director %}
-		<h3>Director: {{director}}</h3>
-		Poster
-		Country
+
+		<!--
+		IT SHOWS THE FIRST MOVIE, NOT THE MOVIE CLICKED
 		Running Time
 		Release Date
-		Cast
-		{% endif %}-->
+		Cast-->
+		<h3>Director: </h3>
+		{% for d in director %}
+			<h3>{{d}}</h3>
+		{% endfor %}
+
+		<h3>Country: </h3>
+		{% for c in country %}
+			<h3>{{c}}</h3>
+		{% endfor %}
+
 		<h3>Genres:</h3>
 		{% for g in genre %}
 			<h3>{{g.name}}</h3>
 		{% endfor %}
+
 		{% if overview %}
 			<h3>Overview: {{overview}}</h3>
 		{% endif %}
 	</body>
 </html>
+
