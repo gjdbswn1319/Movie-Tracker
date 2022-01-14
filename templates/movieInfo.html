@@ -14,23 +14,35 @@
 
 		<!--
 		IT SHOWS THE FIRST MOVIE, NOT THE MOVIE CLICKED
-		Running Time
-		Release Date
-		Cast-->
-		<h3>Director: </h3>
-		{% for d in director %}
-			<h3>{{d}}</h3>
-		{% endfor %}
+		Click Director -> shows movies of the director in the order of popularity
+		Click Cast -> shows movies of the cast in the order of popularity
+		Click Country -> shows movies of the country (now trending)
+		Click Genre -> shows movie of the genre (now trending)
+		-->
 
-		<h3>Country: </h3>
-		{% for c in country %}
-			<h3>{{c}}</h3>
-		{% endfor %}
+		{% if date %}
+			<h3>Release Date: {{date}}</h3>
+		{% endif %}
 
-		<h3>Genres:</h3>
-		{% for g in genre %}
-			<h3>{{g.name}}</h3>
-		{% endfor %}
+		{% if director %}
+			<h3>Director: {{director}}</h3>
+		{% endif %}
+
+		{% if casts %}
+			<h3>Cast: {{casts}}</h3>
+		{% endif %}
+
+		{% if country %}
+			<h3>Country: {{country}}</h3>
+		{% endif %}
+
+		{% if genre %}
+			<h3>Genre: {{genre}}</h3>
+		{% endif %}
+
+		{% if runtime %}
+			<h3>Runtime: {{runtime}} minutes</h3>
+		{% endif %}
 
 		{% if overview %}
 			<h3>Overview: {{overview}}</h3>
