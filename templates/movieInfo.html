@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	</head>
+	<body>
+		{% if title %}
+			<h3>Title: {{title}}</h3>
+		{% endif %}
+		<!--{% if director %}
+		<h3>Director: {{director}}</h3>
+		Poster
+		Country
+		Running Time
+		Release Date
+		Cast
+		{% endif %}-->
+		<h3>Genres:</h3>
+		{% for g in genre %}
+			<h3>{{g.name}}</h3>
+		{% endfor %}
+		{% if overview %}
+			<h3>Overview: {{overview}}</h3>
+		{% endif %}
+	</body>
+</html>
