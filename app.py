@@ -14,40 +14,55 @@ movie_log = pd.read_csv('/Users/EllyHur/Desktop/interview/log.csv', sep='|')
 
 app = Flask(__name__)
 
-def getID(title):
-	movie_title = movie.search(title)
-
-
-
 
 def getCountryByID(detail):
-	country_log = []
 	movie_country = ''
-	for country in detail.production_countries:
-		if movie_country == '':
-			movie_country = country.name
+	for i in range(len(detail.production_countries)):
+		if i == len(detail.production_countries) - 1:
+			movie_country = movie_country + detail.production_countries[i].name
 		else:
-			movie_country = movie_country + ', ' + country.name
-		country_log.append(movie_country)
-	return country_log
+			movie_country = movie_country + detail.production_countries[i].name + ', '
+	return movie_country
+
+def getCastByID(credits):
+	casts = ''
+	for i in range(len(credits.cast)):
+		if i == len(credits.cast) - 1:
+			casts = casts + credits.cast[i].name
+		else: 
+			casts = casts + credits.cast[i].name + ', '
+	return casts
 
 def getDetailByID(movie_id, attribute):
+	genre = ''
 	detail = movie.details(movie_id)
 	credits = movie.credits(movie_id)
-	if (attribute == 'country'):
+	if attribute == 'genres':
+		for i in range(len(detail.genres)):
+			if i == len(detail.genres) - 1:
+				genre = genre + detail.genres[i].name
+			else:
+				genre = genre + detail.genres[i].name + ', '
+		return genre
+	if attribute == 'country':
 		return getCountryByID(detail)
-	if (attribute == 'director'):
+	if attribute == 'director':
 		return getDirectorByID(credits)
-	if (attribute == 'poster'):
+	if attribute == 'poster':
 		return getImageByID(detail)
+	if attribute == 'cast':
+		return getCastByID(credits)
 	result = detail[attribute]
 	return result
 
 def getDirectorByID(credits):
-	director = []
+	director = ''
 	for credit in credits.crew:
 		if credit['job'] == 'Director':
-			director.append(credit.name)
+			if director == '':
+				director = credit.name
+			else:
+				director = director + ', ' + credit.name
 	return director
 
 def getImageByID(detail):
@@ -113,10 +128,13 @@ def movieInfo():
 	director = getDetailByID(movieID, 'director')
 	poster = getDetailByID(movieID, 'poster')
 	country = getDetailByID(movieID, 'country')
+	date = getDetailByID(movieID, 'release_date')
+	casts = getDetailByID(movieID, 'cast')
+	runtime = getDetailByID(movieID, 'runtime')
 
 
 	return render_template('movieInfo.html', title=title, genre=genre, overview=overview, 
-		director=director, poster=poster, country=country)
+		director=director, poster=poster, country=country, date=date, casts=casts, runtime=runtime)
 	
 
 
