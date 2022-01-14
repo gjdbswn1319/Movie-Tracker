@@ -10,8 +10,8 @@
 			<form action='/movieInfo' method="POST">
 			{% for p in poster %}
 			<a href="{{ url_for('movieInfo') }}">
-			<input type='hidden' name='movie_id' value='{{p[1]}}'>
 			<input type='image' src='{{p[0]}}' alt='Poster Not Found'>
+			<input type='hidden' name='movie_id' value='{{p[1]}}'>
 			</a>
 			{% endfor %}
 			</form>>
