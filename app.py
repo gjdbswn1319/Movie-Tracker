@@ -17,10 +17,42 @@ app = Flask(__name__)
 def getID(title):
 	movie_title = movie.search(title)
 
-def getDetail(movie_id, attribute):
+
+
+
+def getCountryByID(detail):
+	country_log = []
+	movie_country = ''
+	for country in detail.production_countries:
+		if movie_country == '':
+			movie_country = country.name
+		else:
+			movie_country = movie_country + ', ' + country.name
+		country_log.append(movie_country)
+	return country_log
+
+def getDetailByID(movie_id, attribute):
 	detail = movie.details(movie_id)
+	credits = movie.credits(movie_id)
+	if (attribute == 'country'):
+		return getCountryByID(detail)
+	if (attribute == 'director'):
+		return getDirectorByID(credits)
+	if (attribute == 'poster'):
+		return getImageByID(detail)
 	result = detail[attribute]
 	return result
+
+def getDirectorByID(credits):
+	director = []
+	for credit in credits.crew:
+		if credit['job'] == 'Director':
+			director.append(credit.name)
+	return director
+
+def getImageByID(detail):
+	path = 'https://image.tmdb.org/t/p/original' + str(detail.poster_path)
+	return path
 
 def getDirector(title):
 	director = []
@@ -75,11 +107,16 @@ def result():
 def movieInfo():
 	output = request.form.to_dict()
 	movieID = output['movie_id']
-	title = getDetail(movieID, 'title')
-	genre = getDetail(movieID, 'genres')
-	overview = getDetail(movieID, 'overview')
+	title = getDetailByID(movieID, 'title')
+	genre = getDetailByID(movieID, 'genres')
+	overview = getDetailByID(movieID, 'overview')
+	director = getDetailByID(movieID, 'director')
+	poster = getDetailByID(movieID, 'poster')
+	country = getDetailByID(movieID, 'country')
 
-	return render_template('movieInfo.html', title=title, genre=genre, overview=overview)
+
+	return render_template('movieInfo.html', title=title, genre=genre, overview=overview, 
+		director=director, poster=poster, country=country)
 	
 
 
