@@ -2,8 +2,9 @@
 
 To Do:
   1. movie_list.html
-     - Director needs to match the poster
-     - More than one directors (ex: Young Ahmed, Matrix, No Country for Old Men)
+     - Director needs to match the poster --> DONE
+     - More than one directors (ex: Young Ahmed, Matrix, No Country for Old Men) --> DONE
+     - Movie posters formatting 
   2. movieinfo.html
      - IT SHOWS THE FIRST MOVIE, NOT THE MOVIE CLICKED
      - Click Director -> shows movies of the director in the order of popularity
