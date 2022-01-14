@@ -4,20 +4,20 @@
 	</head>
 	<body>
 		<center>
-			<!--director match poster
-				two directors (young ahmed)-->
+			<!--moive poster list format-->
 
-			{% for d in director %}
-			<h3>Director: {{d}}</h3>
-			{% endfor %}
+			{% for r in result %}
 			<form action='/movieInfo' method="POST">
-			{% for p in poster %}
-			<a href="{{ url_for('movieInfo') }}">
-			<input type='image' src='{{p[0]}}' alt='Poster Not Found'>
-			<input type='hidden' name='movie_id' value='{{p[1]}}'>
-			</a>
-			{% endfor %}
+				<h3>Title: {{r[3]}}</h3>
+				<h3>Director: {{r[0]}}</h3>
+				<a href="{{ url_for('movieInfo') }}">
+					<input type='image' src='{{r[1]}}' alt='Poster Not Found'>
+					<input type='hidden' name='movie_id' value='{{r[2]}}'>
+				</a>
 			</form>
+			{% endfor %}
+
 		</center>	
 	</body>
 </html>
+
