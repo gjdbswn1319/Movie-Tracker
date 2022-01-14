@@ -69,32 +69,27 @@ def getImageByID(detail):
 	path = 'https://image.tmdb.org/t/p/original' + str(detail.poster_path)
 	return path
 
-def getDirector(title):
-	director = []
-	print(title)
+def findMovie(title):
+	result = []
 	movie_title = movie.search(title)
-	#first_result = movie_title[0]
-	for result in movie_title:
-		credits = movie.credits(result.id)
-	#credits = movie.credits(first_result.id)
+	for mv in movie_title:
+		temp = []
+		credits = movie.credits(mv.id)
+		detail = movie.details(mv.id)
+		director = ''
 		for credit in credits.crew:
 			if credit['job'] == 'Director':
-				director.append(credit.name)
-	return director
-
-def getImage(title):
-	path = []
-	movie_title = movie.search(title)
-	for result in movie_title:
-		detail = movie.details(result.id)
-		temp = []
-		temp.append('https://image.tmdb.org/t/p/original' + str(detail.poster_path))
-		temp.append(result.id)
-		path.append(temp)
-	#first_result = movie_title[0]
-	#detail = movie.details(first_result.id)
-	#return 'https://image.tmdb.org/t/p/original' + detail.poster_path
-	return path
+				if director == '':
+					director = credit.name
+				else:
+					director = director + ', ' + credit.name
+		temp.append(director)
+		path = 'https://image.tmdb.org/t/p/original' + str(detail.poster_path)
+		temp.append(path)
+		temp.append(mv.id)
+		temp.append(mv.title)
+		result.append(temp)
+	return result
 
 @app.route('/')
 
@@ -112,11 +107,10 @@ def result():
 	director = []
 	poster = []
 	output = request.form.to_dict()
-	print(output)
-	director = getDirector(output['movie_title'])
-	poster = getImage(output['movie_title'])
+	result = findMovie(output['movie_title'])
 	
-	return render_template('movie_list.html', director = director, poster = poster)
+	return render_template('movie_list.html', result=result)
+	#result[0] = director/ result[1] = poster_path/ result[2] = movie_id/ result[3] = movie_title
 
 @app.route('/movieInfo', methods = ['POST', 'GET'])
 def movieInfo():
