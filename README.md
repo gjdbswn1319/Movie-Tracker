@@ -6,7 +6,7 @@ To Do:
      - More than one directors (ex: Young Ahmed, Matrix, No Country for Old Men) --> DONE
      - Movie posters formatting 
   2. movieinfo.html
-     - IT SHOWS THE FIRST MOVIE, NOT THE MOVIE CLICKED
+     - IT SHOWS THE FIRST MOVIE, NOT THE MOVIE CLICKED --> FIXED
      - Click Director -> shows movies of the director in the order of popularity
      - Click Cast -> shows movies of the cast in the order of popularity
      - Click Country -> shows movies of the country (now trending)
