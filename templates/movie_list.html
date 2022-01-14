@@ -4,6 +4,9 @@
 	</head>
 	<body>
 		<center>
+			<!--director match poster
+				two directors (young ahmed)-->
+
 			{% for d in director %}
 			<h3>Director: {{d}}</h3>
 			{% endfor %}
@@ -14,7 +17,7 @@
 			<input type='hidden' name='movie_id' value='{{p[1]}}'>
 			</a>
 			{% endfor %}
-			</form>>
+			</form>
 		</center>	
 	</body>
 </html>
