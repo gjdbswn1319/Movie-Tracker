@@ -14,35 +14,32 @@ movie_log = pd.read_csv('/Users/EllyHur/Desktop/interview/log.csv', sep='|')
 
 app = Flask(__name__)
 
+def searchByDirector(name):
+	director_name = person.search(name, {'language': 'kr'})
+	first_result = director_name[0]
+	movies = discover.discover_movies({'with_crew': first_result.id})
+	return movies
+
 
 def getCountryByID(detail):
-	movie_country = ''
-	for i in range(len(detail.production_countries)):
-		if i == len(detail.production_countries) - 1:
-			movie_country = movie_country + detail.production_countries[i].name
-		else:
-			movie_country = movie_country + detail.production_countries[i].name + ', '
+	movie_country = []
+	for country in detail.production_countries:
+		movie_country.append(country.name)
 	return movie_country
 
 def getCastByID(credits):
-	casts = ''
-	for i in range(len(credits.cast)):
-		if i == len(credits.cast) - 1:
-			casts = casts + credits.cast[i].name
-		else: 
-			casts = casts + credits.cast[i].name + ', '
+	casts = []
+	for cast in credits.cast:
+		casts.append(cast.name)
 	return casts
 
 def getDetailByID(movie_id, attribute):
-	genre = ''
+	genre = []
 	detail = movie.details(movie_id)
 	credits = movie.credits(movie_id)
 	if attribute == 'genres':
-		for i in range(len(detail.genres)):
-			if i == len(detail.genres) - 1:
-				genre = genre + detail.genres[i].name
-			else:
-				genre = genre + detail.genres[i].name + ', '
+		for g in detail.genres:
+			genre.append(g.name)
 		return genre
 	if attribute == 'country':
 		return getCountryByID(detail)
@@ -56,13 +53,10 @@ def getDetailByID(movie_id, attribute):
 	return result
 
 def getDirectorByID(credits):
-	director = ''
+	director = []
 	for credit in credits.crew:
 		if credit['job'] == 'Director':
-			if director == '':
-				director = credit.name
-			else:
-				director = director + ', ' + credit.name
+			director.append(credit.name)
 	return director
 
 def getImageByID(detail):
@@ -129,7 +123,15 @@ def movieInfo():
 
 	return render_template('movieInfo.html', title=title, genre=genre, overview=overview, 
 		director=director, poster=poster, country=country, date=date, casts=casts, runtime=runtime)
-	
+
+@app.route('/showInfo', methods = ['POST', 'GET'])	
+def showInfo():
+	output = request.form.to_dict()
+	print('***************************')
+	print(output)
+	print('***************************')
+
+	return render_template('showinfo.html')
 
 
 if __name__ == "__main__":
