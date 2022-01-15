@@ -1,5 +1,7 @@
 # Movie-Tracker
 
+DOWNLOAD THE FILE AND RUN APP.PY
+
 To Do:
   1. movie_list.html
      - Director needs to match the poster --> DONE
