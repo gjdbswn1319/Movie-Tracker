@@ -14,4 +14,16 @@ input{
 	height: auto;
 }
 
+a{
+	color: blue;
+}
+
+p{
+	display:inline;
+}
+
+h3{
+	font-size: 16pt;
+}
+
 
