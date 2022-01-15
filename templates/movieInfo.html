@@ -8,7 +8,7 @@
 		{% if poster %}
 			<input type='image' src='{{poster}}' alt='Poster Not Found'>
 		{% endif %}
-		
+
 		{% if title %}
 			<h3>Title: {{title}}</h3>
 		{% endif %}
@@ -25,21 +25,56 @@
 			<h3>Release Date: {{date}}</h3>
 		{% endif %}
 
-		{% if director %}
-			<h3>Director: {{director}}</h3>
-		{% endif %}
+	<form action='showInfo', method='POST'>
+		<h3>Director: 
+			{% for d in director %}
+				{% if d == director[-1] %}
+				<a href="{{ url_for('showInfo') }}">{{d}}</a> 
+				<input type='hidden' name='director_name' value='{{d}}'>
+				{% else %}
+				<a href="{{ url_for('showInfo') }}">{{d}}</a>, 
+				<input type='hidden' name='director_name' value='{{d}}'>
+				{% endif %}
+			{% endfor %}
+		</h3>
 
-		{% if casts %}
-			<h3>Cast: {{casts}}</h3>
-		{% endif %}
+		<h3>Cast: 
+			{% for cast in casts %}
+				{% if cast == casts[-1] %}
+				<a href="{{ url_for('showInfo') }}">{{cast}}</a> 
+				<input type='hidden' name='cast_name' value='{{cast}}'>
+				{% else %}
+				<a href="{{ url_for('showInfo') }}">{{cast}}</a>, 
+				<input type='hidden' name='cast_name' value='{{cast}}'>
+				{% endif %}
+			{% endfor %}
+		</h3>
 
-		{% if country %}
-			<h3>Country: {{country}}</h3>
-		{% endif %}
+		<h3>Country: 
+			{% for c in country %}
+				{% if c == country[-1] %}
+				<a href="{{ url_for('showInfo') }}">{{c}}</a> 
+				<input type='hidden' name='country_name' value='{{c}}'>
+				{% else %}
+				<a href="{{ url_for('showInfo') }}">{{c}}</a>, 
+				<input type='hidden' name='country_name' value='{{c}}'>
+				{% endif %}
+			{% endfor %}
+		</h3>
 
-		{% if genre %}
-			<h3>Genre: {{genre}}</h3>
-		{% endif %}
+		<h3>Genre: 
+			{% for g in genre %}
+				{% if g == genre[-1] %}
+				<a href="{{ url_for('showInfo') }}">{{g}}</a> 
+				<input type='hidden' name='genre_name' value='{{g}}'>
+				{% else %}
+				<a href="{{ url_for('showInfo') }}">{{g}}</a>, 
+				<input type='hidden' name='genre_name' value='{{g}}'>
+				{% endif %}
+			{% endfor %}
+		</h3>
+		
+	</form>
 
 		{% if runtime %}
 			<h3>Runtime: {{runtime}} minutes</h3>
