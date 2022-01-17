@@ -8,7 +8,7 @@
 
 			{% for r in result %}
 			<form action='/movieInfo' method="POST">
-				<h3>Title: {{r[3]}}</h3>
+				<h3>{{r[3]}}</h3>
 				<h3>Director: {{r[0]}}</h3>
 				<a href="{{ url_for('movieInfo') }}">
 					<input type='image' src='{{r[1]}}' alt='Poster Not Found'>
