@@ -1,6 +1,6 @@
 # Movie-Tracker
 
-DOWNLOAD THE FILE AND RUN APP.PY
+DOWNLOAD THE FILE AND RUN app.py
 
 To Do:
   1. movie_list.html
