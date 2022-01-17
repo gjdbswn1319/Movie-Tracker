@@ -85,6 +85,10 @@ def findMovie(title):
 		result.append(temp)
 	return result
 
+def popularMovie():
+	pm = movie.popular()
+	return pm
+
 @app.route('/')
 
 
@@ -106,12 +110,12 @@ def result():
 	return render_template('movie_list.html', result=result)
 	#result[0] = director/ result[1] = poster_path/ result[2] = movie_id/ result[3] = movie_title
 
-@app.route('/movieInfo', methods = ['POST', 'GET'])
+@app.route('/movieInfo', methods=['POST', 'GET'])
 def movieInfo():
 	output = request.form.to_dict()
-	print('###############################')
+	print('############################')
 	print(output)
-	print('###############################')
+	print('############################')
 	movieID = output['movie_id']
 	title = getDetailByID(movieID, 'title')
 	genre = getDetailByID(movieID, 'genres')
@@ -122,19 +126,31 @@ def movieInfo():
 	date = getDetailByID(movieID, 'release_date')
 	casts = getDetailByID(movieID, 'cast')
 	runtime = getDetailByID(movieID, 'runtime')
+	rate = getDetailByID(movieID, 'vote_average')
 
 
 	return render_template('movieInfo.html', title=title, genre=genre, overview=overview, 
-		director=director, poster=poster, country=country, date=date, casts=casts, runtime=runtime)
+		director=director, poster=poster, country=country, date=date, casts=casts, 
+		runtime=runtime, rate=rate)
 
-@app.route('/showInfo', methods = ['POST', 'GET'])	
-def showInfo():
-	output = request.form.to_dict()
+@app.route('/showinfo', methods=['POST', 'GET'])	
+def showinfo():
+	output = request.values.get('gfjlsdf')
+	output1 = request.form.get('sfsdffsdfd')
+	output2 = request.args.get('ddfsdge')
 	print('***************************')
 	print(output)
+	print(output1)
+	print(output2)
 	print('***************************')
 
 	return render_template('showinfo.html')
+
+@app.route('/movieOfTheWeek', methods=['POST', 'GET'])
+def movieOfTheWeek():
+	popular_movie = popularMovie()
+	return render_template('movieOfTheWeek.html', popular=popular_movie)
+
 
 
 if __name__ == "__main__":
