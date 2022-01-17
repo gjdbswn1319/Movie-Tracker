@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	</head>
+	<body>
+
+		<center>
+			<h2>Movie of the Week</h2>
+		</center>
+
+	{% for p in popular %}
+	<form action='/movieInfo' method="POST">
+		<center>
+			<h3>{{p.title}}</h3>
+		<a href="{{ url_for('movieInfo') }}">
+			<input type='image' src='https://image.tmdb.org/t/p/original{{p.poster_path}}' alt='Poster Not Found'>
+			<input type='hidden' name='movie_id' value='{{p.id}}'>
+		</a>
+		</center>
+	</form>
+	{% endfor %}
+	</body>
+</html>
+
