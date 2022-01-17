@@ -109,6 +109,9 @@ def result():
 @app.route('/movieInfo', methods = ['POST', 'GET'])
 def movieInfo():
 	output = request.form.to_dict()
+	print('###############################')
+	print(output)
+	print('###############################')
 	movieID = output['movie_id']
 	title = getDetailByID(movieID, 'title')
 	genre = getDetailByID(movieID, 'genres')
