@@ -3,15 +3,30 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 	</head>
 	<body>
-		<form class = 'grid' action = '/result' method = 'POST'>
+		<form class='grid' action='/result' method='POST'>
 			
 			<center>
-				<label for = "Name">Enter Movie Title:</label>
-				<input type= 'text' name = 'movie_title' id = 'name'>
+				<label for="Name">Search Movie:</label>
+				<input type='text' name='movie_title' id='name'>
 			</center>
+
 			<center>
-				<input type = 'Submit' class='file_submit'>
-			</center>	
+				<input type='Submit' class='file_submit'>
+			</center>		
 		</form>
+
+		
+		<!--form action='/movieOfTheWeek' method='POST'>
+			<center><label for="Name">See Movie of the Week</label></center>
+
+			<center>	
+				<a href="{{ url_for('movieOfTheWeek') }}">
+					<input type='button' value='Movie of the Week'>
+				</a>
+			</center>
+		</form-->
 	</body>
 </html>
+
+
+<!--Add language button (English, Korean)-->
