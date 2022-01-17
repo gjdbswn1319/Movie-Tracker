@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 	</head>
 	<body>
-		
+		<form action="{{ url_for('showinfo')}}" method="GET">
 		{% if poster %}
 			<input type='image' src='{{poster}}' alt='Poster Not Found'>
 		{% endif %}
@@ -25,15 +25,14 @@
 			<h3>Release Date: {{date}}</h3>
 		{% endif %}
 
-	<form action='showInfo', method='POST'>
 		<h3>Director: 
 			{% for d in director %}
 				{% if d == director[-1] %}
-				<a href="{{ url_for('showInfo') }}">{{d}}</a> 
+				<a href="{{ url_for('showinfo') }}">{{d}}
 				<input type='hidden' name='director_name' value='{{d}}'>
+				</a> 
 				{% else %}
-				<a href="{{ url_for('showInfo') }}">{{d}}</a>, 
-				<input type='hidden' name='director_name' value='{{d}}'>
+				<a href="{{ url_for('showinfo') }}">{{cast}}<input type='hidden' name='director_name' value='{{d}}'></a>,
 				{% endif %}
 			{% endfor %}
 		</h3>
@@ -41,11 +40,11 @@
 		<h3>Cast: 
 			{% for cast in casts %}
 				{% if cast == casts[-1] %}
-				<a href="{{ url_for('showInfo') }}">{{cast}}</a> 
+				<a href="{{ url_for('showinfo') }}">{{cast}}
 				<input type='hidden' name='cast_name' value='{{cast}}'>
+				</a> 
 				{% else %}
-				<a href="{{ url_for('showInfo') }}">{{cast}}</a>, 
-				<input type='hidden' name='cast_name' value='{{cast}}'>
+				<a href="{{ url_for('showinfo') }}">{{cast}}<input type='hidden' name='cast_name' value='{{cast}}'></a>,
 				{% endif %}
 			{% endfor %}
 		</h3>
@@ -53,11 +52,11 @@
 		<h3>Country: 
 			{% for c in country %}
 				{% if c == country[-1] %}
-				<a href="{{ url_for('showInfo') }}">{{c}}</a> 
+				<a href="{{ url_for('showinfo') }}">{{c}}
 				<input type='hidden' name='country_name' value='{{c}}'>
+				</a> 
 				{% else %}
-				<a href="{{ url_for('showInfo') }}">{{c}}</a>, 
-				<input type='hidden' name='country_name' value='{{c}}'>
+				<a href="{{ url_for('showinfo') }}">{{c}}<input type='hidden' name='country_name' value='{{c}}'></a>,
 				{% endif %}
 			{% endfor %}
 		</h3>
@@ -65,16 +64,16 @@
 		<h3>Genre: 
 			{% for g in genre %}
 				{% if g == genre[-1] %}
-				<a href="{{ url_for('showInfo') }}">{{g}}</a> 
+				<a href="{{ url_for('showinfo') }}">{{g}}
 				<input type='hidden' name='genre_name' value='{{g}}'>
+				</a> 
 				{% else %}
-				<a href="{{ url_for('showInfo') }}">{{g}}</a>, 
-				<input type='hidden' name='genre_name' value='{{g}}'>
+				<a href="{{ url_for('showinfo') }}">{{g}}<input type='hidden' name='genre_name' value='{{g}}'></a>,
 				{% endif %}
 			{% endfor %}
 		</h3>
-		
-	</form>
+
+	
 
 		{% if runtime %}
 			<h3>Runtime: {{runtime}} minutes</h3>
@@ -83,5 +82,10 @@
 		{% if overview %}
 			<h3>Overview: {{overview}}</h3>
 		{% endif %}
+
+		{% if rate %}
+			<h3>Rate: {{rate}}</h3>
+		{% endif %}
+		</form>
 	</body>
 </html>
