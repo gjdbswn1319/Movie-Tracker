@@ -49,6 +49,8 @@ def findDirector(movie_log):
 	director_log = []
 	for movie_id in movie_log['ID']:
 		credits = movie.credits(movie_id)
+		print(credits)
+
 		director = ''
 		for credit in credits.crew:
 			if credit['job'] == 'Director':
@@ -84,6 +86,9 @@ def findCountry(movie_log):
 				movie_country = movie_country + ', ' + country.name
 		country_log.append(movie_country)
 	movie_log['Country'] = country_log
+	
+
+
 
 def findYear(movie_log):
 	year_log = []
@@ -94,6 +99,21 @@ def findYear(movie_log):
 		year = yearMonthDate[0]
 		year_log.append(year)
 	movie_log['Year'] = year_log
+	return movie_log
+
+def yearDisplay(movie_log):
+	#new_movie = movie_log.groupby(['Year'])
+	#print(new_movie)
+	#index = 0
+	#for mv in movie_log['Year']:
+		#print(mv)
+		#print(movie_log['Title'][index])
+		#index+=1
+	
+
+
+
+
 
 def histogram(movie_log, data):
 	fig = px.histogram(pd.Series(movie_log[data].str.split(', ').sum())).update_xaxes(categoryorder='total descending')
@@ -119,17 +139,21 @@ def count(movie_log, data):
 					#print(mr.title, mr.id)
 		#print()
 		
+def getImage(movie_log, id):
+	detail = movie.details(id)
+	print(detail.poster_path)
 
 
 def main():
 	movie_log = readFile('log.csv')
-	findDirector(movie_log)
-	findGenre(movie_log)
-	findCountry(movie_log)
-	findYear(movie_log)
-	histogram(movie_log, 'Director')
-	histogram(movie_log, 'Genre')
-	histogram(movie_log, 'Country')
+	#findDirector(movie_log)
+	#findGenre(movie_log)
+	#findCountry(movie_log)
+	#findYear(movie_log)
+	yearDisplay(findYear(movie_log))
+	#histogram(movie_log, 'Director')
+	#histogram(movie_log, 'Genre')
+	#histogram(movie_log, 'Country')
 	#print(count(movie_log, 'Director'))
 	#print(count(movie_log, 'Genre'))
 	#print(count(movie_log, 'Country'))
